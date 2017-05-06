@@ -1,4 +1,18 @@
 <?php
+//create Connection
+$db = new PDO('mysql:host=localhost;dbname=coursemanage', 'root', '');
+
+//build query
+$qery = "SELECT * FROM `students`";
+
+$stmt = $db->query($qery);
+$students = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//buid query
+$qery = "SELECT * FROM `courses`";
+$stmt2 = $db->query($qery);
+
+$courses = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bootstrap 101 Template</title>
-    <base href="http://localhost/CRUD1/">
+
 
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +57,31 @@
                      Students
                  </div>
                  <div class="panel-body">
-                     <p></p>
+                     <?php
+                     $count = 0;
+                        foreach ($students as $number){
+                            $count++;
+                        }
+                        echo '<p>Hear '.$count.'students </p>';
+                     ?>
+                     <p>View <a href="students/allstudent.php">ALL Students</a></p>
+                     <p><a href="students/allstudent.php">Add</a> Students</p>
+                 </div>
+             </div>
+             <div class="panel panel-default margin20">
+                 <div class="panel-heading">
+                     Courses
+                 </div>
+                 <div class="panel-body">
+                     <?php
+                     $countCourse = 0;
+                     foreach ($courses as $number){
+                         $countCourse++;
+                     }
+                     echo '<p>'.$countCourse.' Courses are available </p>';
+                     ?>
+                     <p>View <a href="courses/allcourse.php">ALL</a> Course</p>
+                     <p><a href="courses/addcourse.php">Add</a> Course</p>
                  </div>
              </div>
          </div>
